@@ -16,17 +16,21 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nome</th>
+                        <th scope="col">CPF</th>
                         <th scope="col">Idade</th>
+                        <th scope="col">Área de Atuação</th>
                         <th scope="col">Detalhamento</th>
                     </tr>
                 </thead>
                 <tbody>
-                <% for (const cliente of clientes) {%>
+                <% for (const medico of medicos) {%>
                     <tr>
-                        <td>Id: <%=cliente.id %></td> 
-                        <td>Nome: <%=cliente.nome %></td> 
-                        <td>Idade: <%=cliente.idade %></td> 
-                        <td><a href="http://localhost:3000/clientes/<%=cliente.id%>">Detalhar</a></td>
+                        <td>Id: <%=medico.id %></td> 
+                        <td>Nome: <%=medico.nome %></td> 
+                        <td>CPF: <%=medico.cpf %></td> 
+                        <td>Idade: <%=medico.idade %></td> 
+                        <td>Atuacao: <%=medico.areaDeAtuacao %></td> 
+                        <td><a href="http://localhost:3000/medicos/<%=medico.id%>">Detalhar</a></td>
                     </tr>
                 <% } %>
                 </tbody>

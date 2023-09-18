@@ -9,18 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <form class="form-inline" action="/clientes/cadastro" method="post">
+        <form class="form-inline" action="/medicos/cadastro" method="post">
             <div class="form-group">
-                <label for="codigo"> Código: </label>
-                <input class="form-control" id="codigo" type="number" name="codigo"><br>
+                <label for="id"> Código: </label>
+                <input class="form-control" id="id" type="number" name="id"><br>
             </div>
             <div class="form-group">
                 <label for="nome"> Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome"><br>
             </div>
             <div class="form-group">
+                <label for="cpf"> CPF:</label>
+                <input type="text" class="form-control" id="cpf" name="cpf"><br>
+            </div>
+            <div class="form-group">
                 <label for="idade"> Idade: </label>
                 <input type="text" class="form-control" id="number" name="idade"><br>
+            </div>
+            <div class="form-group">
+                <label for="atuacao"> Área de Atuação:</label>
+                <input type="text" class="form-control" id="atuacao" name="atuacao"><br>
             </div>
             <div class="jumbotron text-center">
                 <input type="submit" class="btn btn-primary" name="env" value="Salvar">
