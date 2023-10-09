@@ -1,3 +1,5 @@
+const req = require("express/lib/request");
+const res = require("express/lib/response");
 const PacienteModel = require("../models/PacienteModel");
 
 class PacienteController {
@@ -9,6 +11,60 @@ class PacienteController {
         if(id == undefined){
             res.render("paciente/relatorio", {pacientes, salvo});
         }
+    }
+
+    static async update(req, res){
+        const id = req.params.id;
+        let encontrou = false;
+        const pacientes = await PacienteModel.find();
+        for(const paciente of pacientes){
+            if(id == paciente.id){
+                encontrou = true;
+                res.render("paciente/cadastro", {paciente});
+                break;
+            }
+        }
+        if(encontrou == false){
+            res.send("Paciente não encontrado");
+        }
+        // const id = req.params.id;
+        // await PacienteModel.findOneAndUpdate({id: req.body.id}, 
+        // {
+        //     nome: req.body.nome, 
+        //     cpf: req.body.cpf, 
+        //     idade: req.body.idade, 
+        //     estado: {
+        //         estado:req.body.estado, 
+        //         cidade:req.body.cidade,
+        //         rua: req.body.rua,
+        //         bairro: req.body.bairro,
+        //         logradouro: req.body.logradouro,
+        //         numero: req.body.numero
+        //     }
+        // });
+    }
+
+    static async updatePost(req, res){
+        await PacienteModel.findOneAndUpdate({id: req.body.id}, 
+        {
+            nome: req.body.nome, 
+            cpf: req.body.cpf, 
+            idade: req.body.idade, 
+            estado: {
+                estado:req.body.estado, 
+                cidade:req.body.cidade,
+                rua: req.body.rua,
+                bairro: req.body.bairro,
+                logradouro: req.body.logradouro,
+                numero: req.body.numero
+            }
+        });
+        res.redirect("/pacientes?s=2");
+    }
+
+    static async delete(req, res){
+        await PacienteModel.findOneAndDelete(req.body.id);
+        res.redirect("/pacientes?s=0");
     }
 
     static async detalhar(req, res){
@@ -28,12 +84,13 @@ class PacienteController {
     }
 
     static cadastrarRoute(req, res){
-        res.render("paciente/cadastro");
+        let paciente = {};
+        res.render("paciente/cadastro", {paciente});
     }
 
     static async cadastrar(req, res){
         const p = new PacienteModel({
-            id: req.body.codigo, 
+            id: req.body.id, 
             nome: req.body.nome,
             cpf: req.body.cpf,
             idade: req.body.idade,
@@ -47,6 +104,7 @@ class PacienteController {
             }
         });
         await p.save();
+        res.redirect("/pacientes?s=1");
     }
 }
 

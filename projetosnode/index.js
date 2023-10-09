@@ -8,15 +8,17 @@ app.use(express.static('public'));
 const mongoose = require("mongoose");
 mongoose.connect("mongodb+srv://rsc5:e1N3OW29TkCTTTze@cluster0.jkf7xb9.mongodb.net/?retryWrites=true&w=majority");
 
-const ClienteRoutes = require("./routes/ClienteRoutes");
 const PacienteRoutes = require("./routes/PacienteRoutes");
 const MedicoRoutes = require("./routes/MedicoRoutes");
-app.use(ClienteRoutes);
 app.use(PacienteRoutes);
 app.use(MedicoRoutes);
 
 app.get("/", function(req, res){
     res.render("index");
+});
+
+app.use(function(req, res){
+    res.status(404).render("404");
 });
 
 app.listen("3000", function(){
