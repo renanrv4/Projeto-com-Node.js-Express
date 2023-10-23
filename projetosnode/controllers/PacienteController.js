@@ -14,34 +14,8 @@ class PacienteController {
     }
 
     static async update(req, res){
-        const id = req.params.id;
-        let encontrou = false;
-        const pacientes = await PacienteModel.find();
-        for(const paciente of pacientes){
-            if(id == paciente.id){
-                encontrou = true;
-                res.render("paciente/cadastro", {paciente});
-                break;
-            }
-        }
-        if(encontrou == false){
-            res.send("Paciente não encontrado");
-        }
-        // const id = req.params.id;
-        // await PacienteModel.findOneAndUpdate({id: req.body.id}, 
-        // {
-        //     nome: req.body.nome, 
-        //     cpf: req.body.cpf, 
-        //     idade: req.body.idade, 
-        //     estado: {
-        //         estado:req.body.estado, 
-        //         cidade:req.body.cidade,
-        //         rua: req.body.rua,
-        //         bairro: req.body.bairro,
-        //         logradouro: req.body.logradouro,
-        //         numero: req.body.numero
-        //     }
-        // });
+        const paciente = await PacienteModel.findOne({id: req.params.id});
+        res.render("paciente/cadastro", {paciente});
     }
 
     static async updatePost(req, res){
@@ -51,8 +25,8 @@ class PacienteController {
             cpf: req.body.cpf, 
             idade: req.body.idade, 
             estado: {
-                estado:req.body.estado, 
-                cidade:req.body.cidade,
+                estado: req.body.estado, 
+                cidade: req.body.cidade,
                 rua: req.body.rua,
                 bairro: req.body.bairro,
                 logradouro: req.body.logradouro,
@@ -68,19 +42,8 @@ class PacienteController {
     }
 
     static async detalhar(req, res){
-        const id = req.params.id;
-        let encontrou = false;
-        const pacientes = await PacienteModel.find();
-        for(const paciente of pacientes){
-            if(id == paciente.id){
-                encontrou = true;
-                res.render("paciente/detalhar", {paciente});
-                break;
-            }
-        }
-        if(encontrou == false){
-            res.send("Paciente não encontrado");
-        }
+        const paciente = await PacienteModel.findOne({id: req.params.id});
+        res.render("paciente/detalhar", {paciente});
     }
 
     static cadastrarRoute(req, res){

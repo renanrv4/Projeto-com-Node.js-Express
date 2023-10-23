@@ -10,8 +10,10 @@ mongoose.connect("mongodb+srv://rsc5:e1N3OW29TkCTTTze@cluster0.jkf7xb9.mongodb.n
 
 const PacienteRoutes = require("./routes/PacienteRoutes");
 const MedicoRoutes = require("./routes/MedicoRoutes");
+const UsuarioRoutes = require("./routes/UsuarioRoutes");
 app.use(PacienteRoutes);
 app.use(MedicoRoutes);
+app.use(UsuarioRoutes);
 
 app.get("/", function(req, res){
     res.render("index");

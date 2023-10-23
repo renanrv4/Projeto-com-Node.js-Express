@@ -12,19 +12,8 @@ class MedicoController {
     }
 
     static async detalhar(req, res){
-        const id = req.params.id;
-        let encontrou = false;
-        const Medicos = await MedicoModel.find();
-        for(const medico of Medicos){
-            if(id == medico.id){
-                encontrou = true;
-                res.render("medico/detalhar", {medico});
-                break;
-            }
-        }
-        if(encontrou == false){
-            res.send("Medico não encontrado");
-        }
+        const medico = await MedicoModel.findOne({id: req.body.id});
+        res.render("medico/detalhar", {medico});
     }
 
     static cadastrarRoute(req, res){

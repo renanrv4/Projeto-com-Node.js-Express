@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include("../partials/cabecalho.ejs")%>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <% if (salvo == 4) { %>
+            <div class="jumbotron text-center" style="background-color: rgb(214, 73, 68);"> E-mail já cadastrado!</div>
+        <% } %>
+            <% if(usuario.id != undefined) {%>
+                <form class="form-inline" action="/usuarios/cadastro/<%=usuario._id%>" method="post">
+                    <div class="form-group">
+                        <label for="nome"> Nome:</label>
+                        <input type="text" required class="form-control" value="<%=usuario.nome%>" id="nome" name="nome"><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"> E-mail:</label>
+                        <input type="email" required class="form-control" value="<%=usuario.email%>" id="email" name="email"><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha"> Senha:</label>
+                        <input type="password" required class="form-control" value="<%=usuario.senha%>" id="senha" name="senha"><br>
+                    </div>
+                    <div class="jumbotron text-center">
+                        <input type="submit" class="btn btn-primary" name="env" value="Atualizar">
+                        <a href="/" class="btn btn-secondary" role="button" >Página Inicial</a>
+                    </div>
+                </form>
+            <% }else{%>
+                <form class="form-inline" action="/usuarios/cadastro" method="post">
+                    <div class="form-group">
+                        <label for="nome"> Nome:</label>
+                        <input type="text" required class="form-control" value="<%=usuario.nome  %>" id="nome" name="nome"><br>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"> E-mail:</label>
+                        <input type="email" required class="form-control" value="<%=usuario.email %>" id="email" name="email"><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha"> Senha:</label>
+                        <input type="password" required class="form-control" id="senha" name="senha"><br>
+                    </div>
+                    <div class="jumbotron text-center">
+                        <input type="submit" class="btn btn-primary" name="env" value="Salvar">
+                        <a href="/" class="btn btn-secondary" role="button" >Página Inicial</a>
+                    </div>
+                </form>
+            <%}%>
+        </form>
+    </div>
+</body>
+
+<footer>
+    <%- include("../partials/rodape.ejs")%>
+</footer>
+
+</html>

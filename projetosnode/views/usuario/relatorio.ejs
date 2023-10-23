@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usuarios</title>
+    <%- include("../partials/cabecalho.ejs")%>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h2>Lista de Pacientes</h2>
+            <table class="table table-striped" border="1">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Detalhamento</th>
+                        <th scope="col">Atualizar</th>
+                        <th scope="col">Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% for (const usuario of usuarios) {%>
+                        <td>Nome: <%=usuario.nome %></td> 
+                        <td>E-mail: <%=usuario.email %></td> 
+                        <td><a href="/usuarios/<%=usuario._id%>">Detalhar</a></td>
+                        <td>
+                            <a role="button" href="/usuarios/cadastro/<%=usuario._id%>" class="btn btn-warning">Atualizar</a>
+                        </td>
+                        <td>
+                            <a role="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</a>
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Deletar Paciente</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              Tem certeza que deseja exluir o usuario?
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <a role="button" href="/usuarios/excluir/<%=usuario._id%>" class="btn btn-primary">Excluir</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <% if (salvo == 2) { %>
+            <div class="jumbotron text-center" style="background-color: rgb(144, 182, 238);"> Atualizado com sucesso!</div>
+        <% } %>
+        <% if (salvo == 1) { %>
+            <div class="jumbotron text-center" style="background-color: lightgreen;"> Cadastrado com sucesso!</div>
+        <% } %>
+        <% if (salvo == 0) { %>
+            <div class="jumbotron text-center" style="background-color: rgb(238, 171, 144);"> Removido com sucesso!</div>
+        <% } %>
+        <br>
+        <div class="jumbotron text-center">
+            <a href="/" class="btn btn-secondary" role="button" >Página Inicial</a>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <%- include("../partials/rodape.ejs")%>
+</footer>
+
+</html>
