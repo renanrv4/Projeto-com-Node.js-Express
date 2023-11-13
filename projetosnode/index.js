@@ -6,6 +6,12 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 const mongoose = require("mongoose");
+const session = require("express-session");
+app.use(session({
+    secret: 'ifpe',
+    saveUninitialized: false,
+    resave: false
+}));
 mongoose.connect("mongodb+srv://rsc5:e1N3OW29TkCTTTze@cluster0.jkf7xb9.mongodb.net/?retryWrites=true&w=majority");
 
 const PacienteRoutes = require("./routes/PacienteRoutes");
@@ -16,7 +22,16 @@ app.use(MedicoRoutes);
 app.use(UsuarioRoutes);
 
 app.get("/", function(req, res){
-    res.render("index");
+    if(req.session.usuario != undefined){
+        res.render("index");
+    }else{
+        res.redirect("/usuarios/login");
+    }
+});
+
+app.get("/logout", function(req, res){
+    req.session.usuario = null;
+    res.redirect("/usuarios/login");
 });
 
 app.use(function(req, res){

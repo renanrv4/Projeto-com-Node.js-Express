@@ -1,6 +1,8 @@
 const req = require("express/lib/request");
 const res = require("express/lib/response");
 const UsuarioModel = require("../models/UsuarioModel");
+const bcryptjs = require("bcryptjs");
+const { redirect } = require("express/lib/response");
 
 class UsuarioController {
 
@@ -13,6 +15,24 @@ class UsuarioController {
         }
     }
 
+    static login(req, res){
+        const salvo = req.query.s;
+        res.render("usuario/login", {salvo});
+    }
+
+    static async loginPost(req, res){
+        const usuario = await UsuarioModel.findOne({email: req.body.email});
+        console.log(usuario);
+        if(usuario != undefined){
+            if(bcryptjs.compareSync(req.body.senha, usuario.senha)){
+                req.session.usuario = usuario.email;
+                res.redirect("/");
+            }else{
+                res.redirect(`/usuarios/login?s=4&email=${req.body.email}`);
+            }
+        }
+    }
+
     static async update(req, res){
         const salvo = req.query.s;
         const usuario = await UsuarioModel.findOne({_id: req.params.id});
@@ -21,13 +41,20 @@ class UsuarioController {
     }
 
     static async updatePost(req, res){
-        await UsuarioModel.findOneAndUpdate({_id: req.params.id}, 
-        {
-            nome: req.body.nome,
-            email: req.body.email,
-            senha: req.body.senha
-        });
-        res.redirect("/usuarios?s=2");
+        const usuarioAtual = await UsuarioModel.findOne({_id: req.body.id});
+        const usuarioEmail = await UsuarioModel.findOne({email: req.body.email});
+        console.log(usuarioAtual);
+        if(usuarioAtual.email == req.body.email || usuarioEmail == null){
+            await UsuarioModel.findOneAndUpdate({_id: req.params.id}, 
+                {
+                    nome: req.body.nome,
+                    email: req.body.email
+                });
+                res.redirect("/usuarios?s=2");
+        } else{
+            res.redirect(`/usuarios/cadastro/${req.body.id}?s=6`);
+        }
+
     }
 
     static async delete(req, res){
@@ -50,12 +77,14 @@ class UsuarioController {
     }
 
     static async cadastrar(req, res){
+        const salt = bcryptjs.genSaltSync();
+        const hash = bcryptjs.hashSync(req.body.senha, salt);
         const usuario = await UsuarioModel.findOne({email: req.body.email});
         if(usuario == null){
             const u = new UsuarioModel({
                 nome: req.body.nome,
                 email: req.body.email,
-                senha: req.body.senha
+                senha: hash
             });
             await u.save();
             res.redirect("/usuarios?s=1");
