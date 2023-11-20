@@ -1,2 +1,2 @@
-projetosnode/node_modules
-projetosnode/.env
+node_modules/
+.env
