@@ -17,7 +17,7 @@ app.use(session({
 
 require("dotenv/config");
 
-mongoose.connect(process.env.MONOG_URI);
+mongoose.connect(process.env.MONGO_URI);
 
 const PacienteRoutes = require("./routes/PacienteRoutes");
 const MedicoRoutes = require("./routes/MedicoRoutes");
