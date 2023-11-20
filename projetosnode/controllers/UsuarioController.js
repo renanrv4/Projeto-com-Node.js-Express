@@ -73,7 +73,12 @@ class UsuarioController {
             email: req.query.email,
             nome: req.query.nome
         };
-        res.render("usuario/cadastro", {usuario, salvo});
+        if(req.session.usuario == null){
+            res.render("usuario/cadastro", {usuario, salvo});
+        }else{
+            res.redirect("/");
+        }
+        
     }
 
     static async cadastrar(req, res){

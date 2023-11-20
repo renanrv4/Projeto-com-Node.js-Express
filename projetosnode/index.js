@@ -5,14 +5,19 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+
 const mongoose = require("mongoose");
+
 const session = require("express-session");
 app.use(session({
     secret: 'ifpe',
     saveUninitialized: false,
     resave: false
 }));
-mongoose.connect("mongodb+srv://rsc5:e1N3OW29TkCTTTze@cluster0.jkf7xb9.mongodb.net/?retryWrites=true&w=majority");
+
+require("dotenv/config");
+
+mongoose.connect(process.env.MONOG_URI);
 
 const PacienteRoutes = require("./routes/PacienteRoutes");
 const MedicoRoutes = require("./routes/MedicoRoutes");
@@ -38,6 +43,6 @@ app.use(function(req, res){
     res.status(404).render("404");
 });
 
-app.listen("3000", function(){
+app.listen(process.env.PORT, function(){
     console.log("Rodando");
 });
