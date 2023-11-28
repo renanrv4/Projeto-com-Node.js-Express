@@ -20,8 +20,8 @@ class PacienteController {
     }
 
     static async updatePost(req, res){
-        const pacienteAtual = await UsuarioModel.findOne({_id: req.body.id});
-        const pacienteCPF = await UsuarioModel.findOne({cpf: req.body.cpf});
+        const pacienteAtual = await PacienteModel.findOne({_id: req.body.id});
+        const pacienteCPF = await PacienteModel.findOne({cpf: req.body.cpf});
         if(pacienteAtual.cpf == req.body.cpf || pacienteCPF == null){
             await PacienteModel.findOneAndUpdate({id: req.body.id}, 
                 {
