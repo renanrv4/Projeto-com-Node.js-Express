@@ -70,40 +70,40 @@
                     <h1>Cadastrar</h1>
                     <div class="form-group">
                         <label for="nome"> Nome:</label>
-                        <input type="text" required class="form-control" id="nome" name="nome"><br>
+                        <input type="text" required class="form-control" id="nome" value="<%=paciente.nome %>" name="nome"><br>
                     </div>
                     <div class="form-group">
                         <label for="cpf"> CPF:</label>
-                        <input type="text" required class="form-control" id="cpf" name="cpf"><br>
+                        <input type="text" required class="form-control" id="cpf" value="<%=paciente.cpf %>" name="cpf"><br>
                     </div>
                     <div class="form-group">
                         <label for="idade"> Idade: </label>
-                        <input type="number" required class="form-control" id="idade" name="idade"><br>
+                        <input type="number" required class="form-control" id="idade" value="<%=paciente.idade %>" name="idade"><br>
                     </div>
                     <h3>Endereço</h3>
                     <div class="form-group">
                         <label for="estado"> Estado: </label>
-                        <input class="form-control" required id="estado" type="text" name="estado"><br>
+                        <input class="form-control" required id="estado" type="text" value="<%=paciente.endereco.estado %>" name="estado"><br>
                     </div>
                     <div class="form-group">
                         <label for="cidade"> Cidade:</label>
-                        <input type="text" required class="form-control" id="cidade" name="cidade"><br>
+                        <input type="text" required class="form-control" value="<%=paciente.endereco.cidade%>" id="cidade" name="cidade"><br>
                     </div>
                     <div class="form-group">
                         <label for="bairro"> Bairro:</label>
-                        <input type="text" required class="form-control" id="bairro" name="bairro"><br>
+                        <input type="text" required class="form-control" value="<%=paciente.endereco.bairro%>" id="bairro" name="bairro"><br>
                     </div>
                     <div class="form-group">
                         <label for="rua"> Rua: </label>
-                        <input type="text" required class="form-control" id="rua" name="rua"><br>
+                        <input type="text" required class="form-control" value="<%=paciente.endereco.rua%>" id="rua" name="rua"><br>
                     </div>
                     <div class="form-group">
                         <label for="logradouro"> Logradouro:</label>
-                        <input type="text" required class="form-control" id="logradouro" name="logradouro"><br>
+                        <input type="text" required class="form-control" value="<%=paciente.endereco.logradouro%>" id="logradouro" name="logradouro"><br>
                     </div>
                     <div class="form-group">
                         <label for="numero"> Número: </label>
-                        <input type="number" required class="form-control" id="numero" name="numero"><br>
+                        <input type="number" required class="form-control" value="<%=paciente.endereco.numero%>" id="numero" name="numero"><br>
                     </div>
                     <div class="jumbotron text-center">
                         <input type="submit" class="btn btn-primary" name="env" value="Salvar">

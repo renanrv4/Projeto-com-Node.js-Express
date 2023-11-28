@@ -65,7 +65,7 @@ class MedicoController {
             await m.save();
             res.redirect("/medicos?s=1");
         }else{
-            res.redirect(`/medicos/cadastro?s=4&nome=${req.body.nome}&idade=${req.body.idade}&areaDeAtuacao=${req.body.atucao}`);
+            res.redirect(`/medicos/cadastro?s=4&nome=${req.body.nome}&idade=${req.body.idade}&areaDeAtuacao=${req.body.atuacao}`);
         }
         
     }
