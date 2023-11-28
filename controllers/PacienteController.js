@@ -14,8 +14,9 @@ class PacienteController {
     }
 
     static async update(req, res){
+        const salvo = req.query.s;
         const paciente = await PacienteModel.findOne({_id: req.params.id});
-        res.render("paciente/cadastro", {paciente});
+        res.render("paciente/cadastro", {paciente, salvo});
     }
 
     static async updatePost(req, res){
