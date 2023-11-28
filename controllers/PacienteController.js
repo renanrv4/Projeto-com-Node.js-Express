@@ -55,7 +55,19 @@ class PacienteController {
 
     static cadastrarRoute(req, res){
         const salvo = req.query.s;
-        let paciente = {};
+        let paciente = {
+            nome: req.query.nome,
+            cpf: req.query.cpf,
+            idade: req.query.idade,
+            endereco: {
+                estado: req.query.estado,
+                cidade: req.query.cidade,
+                rua: req.query.rua,
+                bairro: req.query.bairro,
+                logradouro: req.query.logradouro,
+                numero: req.query.numero
+            }
+        };
         res.render("paciente/cadastro", {paciente, salvo});
     }
 

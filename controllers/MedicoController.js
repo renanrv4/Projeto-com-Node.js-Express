@@ -49,7 +49,12 @@ class MedicoController {
 
     static cadastrarRoute(req, res){
         const salvo = req.query.s;
-        let medico = {};
+        let medico = {
+            nome: req.query.nome,
+            cpf: req.query.cpf,
+            idade: req.query.idade,
+            areaDeAtuacao: req.query.atuacao
+        };
         res.render("medico/cadastro", {medico, salvo});
     }
 
