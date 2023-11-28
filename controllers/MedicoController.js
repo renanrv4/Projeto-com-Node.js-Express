@@ -53,7 +53,7 @@ class MedicoController {
             nome: req.query.nome,
             cpf: req.query.cpf,
             idade: req.query.idade,
-            areaDeAtuacao: req.query.atuacao
+            areaDeAtuacao: req.query.areaDeAtuacao
         };
         res.render("medico/cadastro", {medico, salvo});
     }
