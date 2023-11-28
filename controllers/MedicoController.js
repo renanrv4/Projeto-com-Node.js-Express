@@ -48,8 +48,9 @@ class MedicoController {
     }
 
     static cadastrarRoute(req, res){
+        const salvo = req.query.s;
         let medico = {};
-        res.render("medico/cadastro", {medico});
+        res.render("medico/cadastro", {medico, salvo});
     }
 
     static async cadastrar(req, res){
